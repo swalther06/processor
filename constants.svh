@@ -19,6 +19,14 @@ localparam REG_ADDR_SIZE = $clog2(NUM_REGS);
 localparam ALU_OP_SIZE = 8;
 
 
+// MEMORY
+localparam ADDRESS_SPACE_B = 2 ** REG_SIZE;
+localparam BYTE_SIZE = 'd8;
+localparam WORD_SIZE_BITS = 'd32;
+localparam WORD_SIZE_BYTES = 'd4;
+localparam ADDRESS_SPACE_W = ADDRESS_SPACE_B / WORD_SIZE_BYTES;
+
+
 // OPCODES
 localparam OP_ADD = 0;      // add
 localparam OP_SUB = 1;      // sub
