@@ -1,11 +1,11 @@
 `include "constants.svh"
 
 module ALU (
-    input  logic [REG_SIZE - 1:0]  A,         // 32-bit input A
-    input  logic [REG_SIZE - 1:0]  B,         // 32-bit input B
-    input  logic [OPCODE_SIZE - 1:0]   ALU_Op,    // ALU operation select
-    output logic [REG_SIZE - 1:0]  ALU_Out,   // 32-bit ALU output
-    output logic         Zero       // Zero flag
+    input  logic [REG_SIZE - 1:0]       A,         // 32-bit input A
+    input  logic [REG_SIZE - 1:0]       B,         // 32-bit input B
+    input  logic [OPCODE_SIZE - 1:0]    ALU_Op,    // ALU operation select
+    output logic [REG_SIZE - 1:0]       ALU_Out,   // 32-bit ALU output
+    output logic                        Zero       // Zero flag
 );
 
     always_comb begin
