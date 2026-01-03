@@ -149,21 +149,21 @@ module control (
                 ctrl.regWrEn = 0;
                 ctrl.memEn = 0;
                 ctrl.is_branch = 1;
-                ctrl.alu_op = ALU_AND;
+                ctrl.alu_op = ALU_XOR;
             end
             OP_BLT:
             begin
                 ctrl.regWrEn = 0;
                 ctrl.memEn = 0;
                 ctrl.is_branch = 1;
-                ctrl.alu_op = ALU_AND; // should be ALU_LT
+                ctrl.alu_op = ALU_XOR; // should be ALU_LT
             end
             OP_BST:
             begin
                 ctrl.regWrEn = 0;
                 ctrl.memEn = 0;
                 ctrl.is_branch = 1;
-                ctrl.alu_op = ALU_AND;
+                ctrl.alu_op = ALU_XOR;
             end
             OP_NOP:
             begin
