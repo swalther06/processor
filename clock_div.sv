@@ -1,4 +1,4 @@
-// Clocking for EECS270 FPGA Board
+// Clocking for ALTERA DE2-115 FPGA Board
 // Clock Divider by Powers of 2 (Table of frequencies and periods at EOF)
 module Clock_Div
 	#(parameter SIZE = 36)	// divides by 2^i for i = 0 to i = 36
