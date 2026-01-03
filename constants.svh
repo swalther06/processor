@@ -13,8 +13,6 @@ localparam NUM_INSTRS = 'd11;
 
 // BIT DEFINITIONS
 localparam OPCODE_SIZE = $clog2(NUM_INSTRS);
-localparam OPCODE_START = 'd31;
-localparam OPCODE_END = OPCODE_START - OPCODE_SIZE + 1;
 localparam REG_ADDR_SIZE = $clog2(NUM_REGS);
 localparam ALU_OP_SIZE = 8;
 
@@ -57,6 +55,33 @@ localparam ALU_XOR = 5;
 localparam ALU_LSL = 8;
 localparam ALU_LSR = 9;
 
+
+// INSTRUCTION FIELDS
+localparam UNUSED_START = 31;
+localparam UNUSED_END = 31;
+localparam OPCODE_START = 30;
+localparam OPCODE_END = 26;
+// R-type
+localparam R_RS_START = 25;
+localparam R_RS_END = 21;
+localparam R_RT_START = 20;
+localparam R_RT_END = 16;
+localparam R_RD_START = 15;
+localparam R_RD_END = 11;
+localparam R_SHAMT_START = 10;
+localparam R_SHAMT_END = 6;
+localparam R_FUNCT_START = 5;
+localparam R_FUNCT_END = 0;
+// I-type
+localparam I_RS_START = 25; 
+localparam I_RS_END = 21;
+localparam I_RT_START = 20;
+localparam I_RT_END = 16;
+localparam I_IMM_START = 15;
+localparam I_IMM_END = 0;
+// J-type
+localparam J_ADDR_START = 25;
+localparam J_ADDR_END = 0;
 
 
 `endif
