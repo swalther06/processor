@@ -1,4 +1,5 @@
 
+`include "rtl/memory.sv"
 `include "rtl/constants.svh"
 `include "rtl/pipeline_registers.sv"
 `include "rtl/control.sv"
