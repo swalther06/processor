@@ -1,4 +1,4 @@
-import rtl.constants
+import isa.constants 
 import cocotb
 from cocotb.triggers import Timer
 
@@ -6,7 +6,7 @@ from cocotb.triggers import Timer
 @cocotb.test()
 async def alu_addition_test(dut):
     """Test ALU addition operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_ADD  # Assuming opcode 0 is for addition
+    dut.ALU_Op.value = isa.constants.ALU_ADD  # Assuming opcode 0 is for addition
     dut.A.value = 15
     dut.B.value = 10
 
@@ -18,7 +18,7 @@ async def alu_addition_test(dut):
 @cocotb.test()
 async def alu_subtraction_test(dut):
     """Test ALU subtraction operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_SUB  # Assuming opcode 1 is for subtraction
+    dut.ALU_Op.value = isa.constants.ALU_SUB  # Assuming opcode 1 is for subtraction
     dut.A.value = 20
     dut.B.value = 5
 
@@ -30,7 +30,7 @@ async def alu_subtraction_test(dut):
 @cocotb.test()
 async def alu_and_test(dut):
     """Test ALU AND operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_AND  # Assuming opcode 2 is for AND
+    dut.ALU_Op.value = isa.constants.ALU_AND  # Assuming opcode 2 is for AND
     dut.A.value = 0b1100
     dut.B.value = 0b1010
 
@@ -42,7 +42,7 @@ async def alu_and_test(dut):
 @cocotb.test()
 async def alu_or_test(dut):
     """Test ALU OR operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_OR  # Assuming opcode 3 is for OR
+    dut.ALU_Op.value = isa.constants.ALU_OR  # Assuming opcode 3 is for OR
     dut.A.value = 0b1100
     dut.B.value = 0b1010
 
@@ -54,7 +54,7 @@ async def alu_or_test(dut):
 @cocotb.test()
 async def alu_xor_test(dut):
     """Test ALU XOR operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_XOR  # Assuming opcode 4 is for XOR
+    dut.ALU_Op.value = isa.constants.ALU_XOR  # Assuming opcode 4 is for XOR
     dut.A.value = 0b1100
     dut.B.value = 0b1010
 
@@ -66,7 +66,7 @@ async def alu_xor_test(dut):
 @cocotb.test()
 async def alu_nor_test(dut):
     """Test ALU NOR operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_NOR  # Assuming opcode 5 is for NOR
+    dut.ALU_Op.value = isa.constants.ALU_NOR  # Assuming opcode 5 is for NOR
     dut.A.value = 0b1100
     dut.B.value = 0b1010
 
@@ -78,7 +78,7 @@ async def alu_nor_test(dut):
 @cocotb.test()
 async def alu_lsl_test(dut):
     """Test ALU Logical Shift Left operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_LSL  # Assuming opcode 6 is for LSL
+    dut.ALU_Op.value = isa.constants.ALU_LSL  # Assuming opcode 6 is for LSL
     dut.A.value = 0b0001
     dut.B.value = 2  # Shift by 2
 
@@ -90,7 +90,7 @@ async def alu_lsl_test(dut):
 @cocotb.test()
 async def alu_lsr_test(dut):
     """Test ALU Logical Shift Right operation"""
-    dut.ALU_Op.value = rtl.constants.ALU_LSR  # Assuming opcode 7 is for LSR
+    dut.ALU_Op.value = isa.constants.ALU_LSR  # Assuming opcode 7 is for LSR
     dut.A.value = 0b0100
     dut.B.value = 2  # Shift by 2
 
