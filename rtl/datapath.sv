@@ -1,12 +1,15 @@
 
 `include "rtl/memory.sv"
-`include "rtl/constants.svh"
+`include "isa/constants.svh"
 `include "rtl/pipeline_registers.sv"
 `include "rtl/control.sv"
+`include "rtl/regfile.sv"
+`include "rtl/alu.sv"
 
 
 module datapath (
-    input logic clk
+    input logic clk,
+    input logic rst
 );
     logic [PC_SIZE - 1:0] pc;
     initial pc = 0;
@@ -20,8 +23,9 @@ module datapath (
 
 
     // Data and Instruction Memory
-    logic memEN, memRW, addr, wdata, rdata;
-    logic instr;
+    logic memEN, memRW;
+    logic [REG_SIZE - 1:0] addr, wdata, rdata;
+    logic [REG_SIZE - 1:0] instr;
     memory data_memory (
         .clk(clk),
         .mem_EN(memEN),
@@ -43,21 +47,22 @@ module datapath (
 
     // Control Unit
     control_t ctrl_ID;
-    processor_control control_unit (
-        .instr(reg_ifid.instr),
+    logic [INSTR_LEN - 1:0] instr_ID;
+    control control_unit (
+        .instr(instr_ID),
         .ctrl(ctrl_ID)
     );
 
 
     // ALU
-    logic [REG_SIZE - 1:0]  alu_result;
-    logic                   alu_zero;
-    logic [REG_SIZE - 1:0]  alu_A, alu_B;
-    logic                   alu_op;
+    logic [REG_SIZE - 1:0]      alu_result;
+    logic                       alu_zero;
+    logic [REG_SIZE - 1:0]      alu_A, alu_B;
+    logic [OPCODE_SIZE - 1:0]   alu_op;
     ALU alu_unit (
         .A(alu_A),
         .B(alu_B),
-        .ALU_Op(reg_idex.ctrl.alu_op),
+        .ALU_Op(alu_op),
         .ALU_Out(alu_result),
         .Zero(alu_zero)
     );
@@ -69,11 +74,13 @@ module datapath (
     logic write_en;
     regfile register_file (
         .clk(clk),
-        .read_addr1(reg_idex.regA_addr),
-        .read_addr2(reg_idex.regB_addr),
-        .write_addr(write_addr),
-        .write_data(write_data),
-        .write_en(write_en)
+        .RegA(regA_addr),
+        .RegB(regB_addr),
+        .WriteReg(write_addr),
+        .WriteData(write_data),
+        .Data1(regA_data),
+        .Data2(regB_data),
+        .WriteEnable(write_en)
     );
 
 
@@ -86,7 +93,8 @@ module datapath (
 
 
     // ID
-    always_comb begin
+    always @* begin
+        instr_ID = reg_ifid.instr;
         regA_addr = reg_ifid.instr[R_RS_START:R_RS_END];
         regB_addr = reg_ifid.instr[R_RT_START:R_RT_END];
     end
@@ -103,9 +111,10 @@ module datapath (
 
 
     // EX
-    always_comb begin
+    always @* begin
         alu_A = reg_idex.regA_data;
         alu_B = reg_idex.ctrl.SEL_valB ? reg_idex.offset : reg_idex.regB_data;
+        alu_op = reg_idex.ctrl.alu_op;
     end
     always_ff @(posedge clk) begin : ex_stage
         reg_exmem.pc_plus1 <= reg_idex.pc_plus1;
@@ -135,7 +144,7 @@ module datapath (
 
 
     // WB
-    always_comb begin
+    always @* begin
         write_addr = reg_memwb.ctrl.SEL_destReg ? 
                      reg_memwb.instr[R_RD_START:R_RD_END] : reg_memwb.instr[R_RT_START:R_RT_END];
         write_data = reg_memwb.wb_val;

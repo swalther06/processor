@@ -1,7 +1,7 @@
 `ifndef PIPELINE_REGISTERS_SV
 `define PIPELINE_REGISTERS_SV
 
-`include "rtl/constants.svh"
+`include "isa/constants.svh"
 `include "rtl/control.sv"
 
 

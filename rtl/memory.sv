@@ -1,7 +1,7 @@
 `ifndef MEMORY_SV
 `define MEMORY_SV
 
-`include "rtl/constants.svh"
+`include "isa/constants.svh"
 
 
 

@@ -1,7 +1,7 @@
 `ifndef CONTROL_SV
 `define CONTROL_SV
 
-`include "rtl/constants.svh"
+`include "isa/constants.svh"
 
 typedef struct packed {
     logic regWrEn;                      // allows writing to regfile
@@ -182,6 +182,32 @@ module control (
                 ctrl.SEL_destReg = 0;
                 ctrl.is_branch = 0;
                 ctrl.alu_op = ALU_SUB;
+            end
+            OP_ADDI:
+            begin
+                ctrl.regWrEn = 1;
+                ctrl.memEn = 0;
+                ctrl.SEL_valB = 1;
+                ctrl.SEL_wrData = 0;
+                ctrl.SEL_destReg = 1;
+                ctrl.is_branch = 0;
+                ctrl.alu_op = ALU_ADD;
+            end
+            OP_SUBI:
+            begin
+                ctrl.regWrEn = 1;
+                ctrl.memEn = 0;
+                ctrl.SEL_valB = 1;
+                ctrl.SEL_wrData = 0;
+                ctrl.SEL_destReg = 1;
+                ctrl.is_branch = 0;
+                ctrl.alu_op = ALU_SUB;
+            end
+            default:
+            begin
+                ctrl.regWrEn = 0;
+                ctrl.memEn = 0;
+                ctrl.is_branch = 0;
             end
             
         endcase

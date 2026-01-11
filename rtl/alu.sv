@@ -1,7 +1,7 @@
 `ifndef ALU_SV
 `define ALU_SV
 
-`include "rtl/constants.svh"
+`include "isa/constants.svh"
 
 module ALU (
     input  logic [REG_SIZE - 1:0]       A,         // 32-bit input A

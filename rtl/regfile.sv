@@ -1,7 +1,7 @@
 `ifndef REGFILE_SV
 `define REGFILE_SV
 
-`include "rtl/constants.svh"
+`include "isa/constants.svh"
 
 module regfile (
     input  logic                        clk,            // Clock signal
